@@ -124,6 +124,11 @@ namespace Microsoft.AspNet.SignalR.Transports
             return Send((object)response);
         }
 
+        protected internal override Task InitializeResponse(ITransportConnection connection)
+        {
+            return KeepAlive();
+        }
+
         private static Task PerformSend(object state)
         {
             var context = (WebSocketTransportContext)state;
