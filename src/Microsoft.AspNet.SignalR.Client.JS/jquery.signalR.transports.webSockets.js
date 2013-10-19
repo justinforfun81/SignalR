@@ -100,8 +100,6 @@
                     var data = window.JSON.parse(event.data),
                         $connection = $(connection);
 
-                    transportLogic.clearReconnectTimeout(connection);
-
                     if (onSuccess) {
                         onSuccess();
                         onSuccess = null;
@@ -110,6 +108,8 @@
                                          signalR.connectionState.connected) === true) {
                         $connection.triggerHandler(events.onReconnect);
                     }
+
+                    transportLogic.clearReconnectTimeout(connection);
 
                     if (data) {
                         // data.M is PersistentResponse.Messages
